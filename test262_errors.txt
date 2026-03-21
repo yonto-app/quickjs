@@ -23,6 +23,8 @@ test262/test/language/module-code/ambiguous-export-bindings/import-and-export-pr
 test262/test/language/module-code/ambiguous-export-bindings/namespace-unambiguous-if-export-star-as-from-and-import-star-as-and-export.js:74: SyntaxError: export 'foo' in module 'test262/test/language/module-code/ambiguous-export-bindings/namespace-unambiguous-if-import-star-as-and-export.js' is ambiguous
 test262/test/language/module-code/ambiguous-export-bindings/namespace-unambiguous-if-export-star-as-from.js:75: SyntaxError: export 'foo' in module 'test262/test/language/module-code/ambiguous-export-bindings/namespace-unambiguous-if-export-star-as-from.js' is ambiguous
 test262/test/language/module-code/ambiguous-export-bindings/namespace-unambiguous-if-import-star-as-and-export.js:74: SyntaxError: export 'foo' in module 'test262/test/language/module-code/ambiguous-export-bindings/namespace-unambiguous-if-import-star-as-and-export.js' is ambiguous
+test262/test/staging/built-ins/RegExp/escape/surrogate-pair.js:9: Test262Error: Unescaped surrogate pair Expected SameValue(«"\\ud800\\udc00"», «"𐀀"») to be true
+test262/test/staging/built-ins/RegExp/escape/surrogate-pair.js:9: strict mode: Test262Error: Unescaped surrogate pair Expected SameValue(«"\\ud800\\udc00"», «"𐀀"») to be true
 test262/test/staging/sm/Function/arguments-parameter-shadowing.js:14: Test262Error: Expected SameValue(«true», «false») to be true
 test262/test/staging/sm/Function/constructor-binding.js:11: Test262Error: Expected SameValue(«"function"», «"undefined"») to be true
 test262/test/staging/sm/Function/constructor-binding.js:11: strict mode: Test262Error: Expected SameValue(«"function"», «"undefined"») to be true
@@ -31,8 +33,6 @@ test262/test/staging/sm/Function/function-name-for.js:13: Test262Error: Expected
 test262/test/staging/sm/Function/implicit-this-in-parameter-expression.js:12: Test262Error: Expected SameValue(«[object Object]», «undefined») to be true
 test262/test/staging/sm/Function/invalid-parameter-list.js:13: Test262Error: Expected a SyntaxError to be thrown but no exception was thrown at all
 test262/test/staging/sm/Function/invalid-parameter-list.js:13: strict mode: Test262Error: Expected a SyntaxError to be thrown but no exception was thrown at all
-test262/test/staging/sm/String/string-upper-lower-mapping.js:16: Test262Error: Expected SameValue(«"꟏"», «"꟎"») to be true
-test262/test/staging/sm/String/string-upper-lower-mapping.js:16: strict mode: Test262Error: Expected SameValue(«"꟏"», «"꟎"») to be true
 test262/test/staging/sm/TypedArray/prototype-constructor-identity.js:17: Test262Error: Expected SameValue(«2», «6») to be true
 test262/test/staging/sm/TypedArray/prototype-constructor-identity.js:17: strict mode: Test262Error: Expected SameValue(«2», «6») to be true
 test262/test/staging/sm/async-functions/async-contains-unicode-escape.js:11: Test262Error: Expected a SyntaxError to be thrown but no exception was thrown at all
