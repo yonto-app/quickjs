@@ -1841,15 +1841,17 @@ int JS_GetStripInfo(JSRuntime *rt)
     return rt->strip_flags;
 }
 
-/* return 0 if OK, < 0 if exception */
-int JS_EnqueueJob(JSContext *ctx, JSJobFunc *job_func,
-                  int argc, JSValueConst *argv)
+static int JS_EnqueueJob2(JSContext *ctx, JSJobFunc *job_func,
+                          int argc, JSValueConst *argv, BOOL no_exception)
 {
     JSRuntime *rt = ctx->rt;
     JSJobEntry *e;
     int i;
 
-    e = js_malloc(ctx, sizeof(*e) + argc * sizeof(JSValue));
+    if (no_exception)
+        e = js_malloc_rt(ctx->rt, sizeof(*e) + argc * sizeof(JSValue));
+    else
+        e = js_malloc(ctx, sizeof(*e) + argc * sizeof(JSValue));
     if (!e)
         return -1;
     e->realm = JS_DupContext(ctx);
@@ -1860,6 +1862,13 @@ int JS_EnqueueJob(JSContext *ctx, JSJobFunc *job_func,
     }
     list_add_tail(&e->link, &rt->job_list);
     return 0;
+}
+
+/* return 0 if OK, < 0 if exception */
+int JS_EnqueueJob(JSContext *ctx, JSJobFunc *job_func,
+                  int argc, JSValueConst *argv)
+{
+    return JS_EnqueueJob2(ctx, job_func, argc, argv, FALSE);
 }
 
 BOOL JS_IsJobPending(JSRuntime *rt)
@@ -59398,7 +59407,8 @@ static void finrec_delete_weakref(JSRuntime *rt, JSWeakRefHeader *wh)
             JSValueConst args[2];
             args[0] = frd->cb;
             args[1] = fre->held_val;
-            JS_EnqueueJob(frd->realm, js_finrec_job, 2, args);
+            /* no exception is raised to avoid recursing into the GC */
+            JS_EnqueueJob2(frd->realm, js_finrec_job, 2, args, TRUE);
                 
             js_weakref_free(rt, fre->target);
             js_weakref_free(rt, fre->token);
